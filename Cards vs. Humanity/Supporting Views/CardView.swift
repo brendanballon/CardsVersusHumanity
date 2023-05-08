@@ -10,7 +10,7 @@ import SwiftUI
 struct CardView: View {
     let card: Card
     let faceDown: Bool?
-    
+
     @State var textSize: CGSize = .zero
     
     init(card: Card, faceDown: Bool? = false) {
@@ -82,9 +82,61 @@ struct CardView: View {
 struct CardView_Previews: PreviewProvider {
     static var previews: some View {
         HStack {
-            CardView(card: BlackCard(text: "Test", pack: "dsf", pick: 3))
+            CardView(card: BlackCard(text: "Test", pack: "dsf", pick: 2))
             CardView(card: WhiteCard(text: "Test", pack: "dsf"))
         }
-            .previewLayout(.sizeThatFits)
+        .previewLayout(.sizeThatFits)
     }
 }
+
+struct CardPointView<CardView: View>: View {
+    @State private var cardViews: [CardView]
+    @State private var draggedCardIndex: Int?
+    @State private var draggedCardPosition: CGPoint = .zero
+    
+    init(cardViews: [CardView]) {
+        self._cardViews = State(initialValue: cardViews)
+    }
+    
+    var body: some View {
+        GeometryReader { geometry in
+            let spacing = geometry.size.width / 5.0
+            
+            ZStack {
+                ForEach(0..<5) { index in
+                    let cardIndex = min(index, cardViews.count - 1)
+                    let card = cardViews[cardIndex]
+                    
+                    card
+                        .frame(width: spacing * 0.8, height: geometry.size.height * 0.8)
+                        .opacity(cardIndex == index ? 1.0 : 0.0)
+                        .animation(.easeInOut)
+                        .position(x: spacing * CGFloat(index) + spacing / 2.0,
+                                  y: geometry.size.height / 2.0)
+                        .zIndex(cardIndex == draggedCardIndex ? 1 : 0)
+                        .offset(x: draggedCardPosition.x,
+                                y: draggedCardPosition.y)
+                        .gesture(
+                            DragGesture()
+                                .onChanged { value in
+                                    draggedCardIndex = cardIndex
+                                    draggedCardPosition = value.location
+                                }
+                                .onEnded { value in
+                                    guard let fromIndex = draggedCardIndex else { return }
+                                    let translation = value.translation.width
+                                    let newIndex = max(0, min(4, fromIndex + Int(round(translation / spacing))))
+                                    if newIndex != fromIndex {
+                                        let card = cardViews.remove(at: fromIndex)
+                                        cardViews.insert(card, at: newIndex)
+                                    }
+                                    draggedCardIndex = nil
+                                    draggedCardPosition = .zero
+                                }
+                        )
+                }
+            }
+        }
+    }
+}
+

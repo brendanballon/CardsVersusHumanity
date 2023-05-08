@@ -18,8 +18,7 @@ struct ContentView: View {
         VStack {
             VStack(alignment: .leading) {
                 Text("Cards\nvs.\nHumanity")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
+                    .font(.system(size: txtSize.height * 1.75, weight: .semibold))
             }
             Spacer()
             Text("Verify ownership")
@@ -47,10 +46,11 @@ struct ContentView: View {
                 .alert(isPresented: $showAlert) {
                     Alert(
                         title: Text("Product Authenticity Verification Failed"),
-                        message: Text("Make sure the code is typed exactly how it is seen on the back of the box.")
+                        message: Text("Make sure the code is typed exactly as it is seen on the back of the box.")
                     )
                 }
         }
+        .preferredColorScheme(.light)
         .padding()
         .onAppear {
             // Read cards from UserDefaults

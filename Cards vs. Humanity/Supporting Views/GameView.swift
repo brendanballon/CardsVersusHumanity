@@ -11,6 +11,7 @@ struct GameView: View {
     @State var cards: Cards?
     @State var randomCard: BlackCard?
     
+    @State var allowReordering: Bool = true
     @State var viewSize: CGSize = .zero
     
     init(cards: Cards? = nil, randomCard: BlackCard? = nil) {
@@ -19,24 +20,25 @@ struct GameView: View {
     }
     
     var body: some View {
+        
         VStack {
             CardView(card: randomCard ?? BlackCard(text: "", pack: "", pick: 0))
-                .frame(width: 300)
+                .frame(width: 250)
                 .onTapGesture {
                     randomize()
                 }
+                .frame(width: 100)
             
             Spacer()
             
-            VStack {
-                CardStack(cards: [ WhiteCard(text: "What does this say?", pack: ""),
-                                   WhiteCard(text: "Your mom.", pack: ""),
-                                   WhiteCard(text: "Okey dokey...", pack: ""),
-                                   WhiteCard(text: "KYS", pack: ""),
-                                   WhiteCard(text: "Hi fatty", pack: "")
-                                 ], spread: true)
-            }
-            .frame(maxHeight: 250)
+            
+            CardStack(cards: [ WhiteCard(text: "Te", pack: ""),
+                               WhiteCard(text: "gg", pack: ""),
+                               WhiteCard(text: "yyyye", pack: ""),
+                               WhiteCard(text: "ge", pack: ""),
+                               WhiteCard(text: "Tyouyoe", pack: "")
+            
+                            ], allowReordering: allowReordering)
         }
         .padding()
         .frame(maxWidth: .infinity, maxHeight: .infinity)

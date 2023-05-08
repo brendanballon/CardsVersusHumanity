@@ -1,5 +1,5 @@
 //
-//  LogoShape.swift
+//  CustomShapes.swift
 //  Cards vs. Humanity
 //
 //  Created by Brendan Ballon on 4/30/23.
@@ -63,3 +63,32 @@ struct LogoShape: Shape {
         return path
     }
 }
+
+struct CardShape: Shape {
+    let aspectRatio: CGFloat = 5/7
+    
+    func path(in rect: CGRect) -> Path {
+        let width = min(rect.width, rect.height * aspectRatio)
+        let height = width / aspectRatio
+        let cornerRadius = height / 20
+        
+        let xInset = (rect.width - width) / 2
+        let yInset = (rect.height - height) / 2
+        let frame = CGRect(x: xInset, y: yInset, width: width, height: height)
+        
+        var path = Path()
+        path.move(to: CGPoint(x: frame.minX + cornerRadius, y: frame.minY))
+        path.addLine(to: CGPoint(x: frame.maxX - cornerRadius, y: frame.minY))
+        path.addArc(center: CGPoint(x: frame.maxX - cornerRadius, y: frame.minY + cornerRadius), radius: cornerRadius, startAngle: Angle(degrees: -90), endAngle: Angle(degrees: 0), clockwise: false)
+        path.addLine(to: CGPoint(x: frame.maxX, y: frame.maxY - cornerRadius))
+        path.addArc(center: CGPoint(x: frame.maxX - cornerRadius, y: frame.maxY - cornerRadius), radius: cornerRadius, startAngle: Angle(degrees: 0), endAngle: Angle(degrees: 90), clockwise: false)
+        path.addLine(to: CGPoint(x: frame.minX + cornerRadius, y: frame.maxY))
+        path.addArc(center: CGPoint(x: frame.minX + cornerRadius, y: frame.maxY - cornerRadius), radius: cornerRadius, startAngle: Angle(degrees: 90), endAngle: Angle(degrees: 180), clockwise: false)
+        path.addLine(to: CGPoint(x: frame.minX, y: frame.minY + cornerRadius))
+        path.addArc(center: CGPoint(x: frame.minX + cornerRadius, y: frame.minY + cornerRadius), radius: cornerRadius, startAngle: Angle(degrees: 180), endAngle: Angle(degrees: 270), clockwise: false)
+        path.closeSubpath()
+        
+        return path
+    }
+}
+

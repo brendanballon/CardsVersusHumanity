@@ -37,22 +37,3 @@ func fetchCards() {
         task.resume()
     }
 }
-
-protocol Card {
-    var text: String { get }
-    var pack: String { get }
-}
-
-struct Cards: Codable {
-    let black: [BlackCard]
-    let white: [WhiteCard]
-}
-
-struct BlackCard: Codable, Card {
-    let text, pack: String
-    let pick: Int
-}
-
-struct WhiteCard: Codable, Card {
-    let text, pack: String
-}

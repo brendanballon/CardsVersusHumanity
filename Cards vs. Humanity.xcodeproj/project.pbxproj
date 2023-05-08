@@ -14,13 +14,14 @@
 		543BCC8D29FEEEFC00B00947 /* Cards_vs__HumanityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543BCC8C29FEEEFC00B00947 /* Cards_vs__HumanityTests.swift */; };
 		543BCC9729FEEEFC00B00947 /* Cards_vs__HumanityUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543BCC9629FEEEFC00B00947 /* Cards_vs__HumanityUITests.swift */; };
 		543BCC9929FEEEFC00B00947 /* Cards_vs__HumanityUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543BCC9829FEEEFC00B00947 /* Cards_vs__HumanityUITestsLaunchTests.swift */; };
-		543BCCA629FEEF7100B00947 /* LogoShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543BCCA529FEEF7100B00947 /* LogoShape.swift */; };
-		543BCCA829FEF00500B00947 /* ProductAuthenticity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543BCCA729FEF00500B00947 /* ProductAuthenticity.swift */; };
+		543BCCA629FEEF7100B00947 /* CustomShapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543BCCA529FEEF7100B00947 /* CustomShapes.swift */; };
+		543BCCA829FEF00500B00947 /* Authenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543BCCA729FEF00500B00947 /* Authenticator.swift */; };
 		543BCCAA29FEF0BC00B00947 /* FetchCards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543BCCA929FEF0BC00B00947 /* FetchCards.swift */; };
 		543BCCAC29FEF15C00B00947 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543BCCAB29FEF15C00B00947 /* CardView.swift */; };
-		543BCCAE29FEF18400B00947 /* GetSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543BCCAD29FEF18400B00947 /* GetSize.swift */; };
-		543BCCB029FEF40800B00947 /* CardStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543BCCAF29FEF40800B00947 /* CardStack.swift */; };
+		543BCCAE29FEF18400B00947 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543BCCAD29FEF18400B00947 /* Utilities.swift */; };
 		543BCCB229FEF43C00B00947 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543BCCB129FEF43C00B00947 /* GameView.swift */; };
+		54E0BA9E2A054FF8000B2823 /* CardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E0BA9D2A054FF8000B2823 /* CardModel.swift */; };
+		54E0BAA02A05507A000B2823 /* CardStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E0BA9F2A05507A000B2823 /* CardStack.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,13 +52,14 @@
 		543BCC9229FEEEFC00B00947 /* Cards vs. HumanityUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Cards vs. HumanityUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		543BCC9629FEEEFC00B00947 /* Cards_vs__HumanityUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cards_vs__HumanityUITests.swift; sourceTree = "<group>"; };
 		543BCC9829FEEEFC00B00947 /* Cards_vs__HumanityUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cards_vs__HumanityUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		543BCCA529FEEF7100B00947 /* LogoShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoShape.swift; sourceTree = "<group>"; };
-		543BCCA729FEF00500B00947 /* ProductAuthenticity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductAuthenticity.swift; sourceTree = "<group>"; };
+		543BCCA529FEEF7100B00947 /* CustomShapes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomShapes.swift; sourceTree = "<group>"; };
+		543BCCA729FEF00500B00947 /* Authenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authenticator.swift; sourceTree = "<group>"; };
 		543BCCA929FEF0BC00B00947 /* FetchCards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchCards.swift; sourceTree = "<group>"; };
 		543BCCAB29FEF15C00B00947 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
-		543BCCAD29FEF18400B00947 /* GetSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSize.swift; sourceTree = "<group>"; };
-		543BCCAF29FEF40800B00947 /* CardStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardStack.swift; sourceTree = "<group>"; };
+		543BCCAD29FEF18400B00947 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		543BCCB129FEF43C00B00947 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
+		54E0BA9D2A054FF8000B2823 /* CardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardModel.swift; sourceTree = "<group>"; };
+		54E0BA9F2A05507A000B2823 /* CardStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardStack.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,13 +112,8 @@
 			children = (
 				543BCC7B29FEEEFB00B00947 /* Cards_vs__HumanityApp.swift */,
 				543BCC7D29FEEEFB00B00947 /* ContentView.swift */,
-				543BCCA529FEEF7100B00947 /* LogoShape.swift */,
-				543BCCA729FEF00500B00947 /* ProductAuthenticity.swift */,
-				543BCCA929FEF0BC00B00947 /* FetchCards.swift */,
-				543BCCAB29FEF15C00B00947 /* CardView.swift */,
-				543BCCAF29FEF40800B00947 /* CardStack.swift */,
-				543BCCB129FEF43C00B00947 /* GameView.swift */,
-				543BCCAD29FEF18400B00947 /* GetSize.swift */,
+				54A028262A087E2700C4F050 /* Supporting Views */,
+				543BCCB329FEFEC100B00947 /* Extras */,
 				543BCC7F29FEEEFC00B00947 /* Assets.xcassets */,
 				543BCC8129FEEEFC00B00947 /* Preview Content */,
 			);
@@ -148,6 +145,28 @@
 			path = "Cards vs. HumanityUITests";
 			sourceTree = "<group>";
 		};
+		543BCCB329FEFEC100B00947 /* Extras */ = {
+			isa = PBXGroup;
+			children = (
+				543BCCA529FEEF7100B00947 /* CustomShapes.swift */,
+				543BCCA729FEF00500B00947 /* Authenticator.swift */,
+				543BCCA929FEF0BC00B00947 /* FetchCards.swift */,
+				54E0BA9D2A054FF8000B2823 /* CardModel.swift */,
+				543BCCAD29FEF18400B00947 /* Utilities.swift */,
+			);
+			path = Extras;
+			sourceTree = "<group>";
+		};
+		54A028262A087E2700C4F050 /* Supporting Views */ = {
+			isa = PBXGroup;
+			children = (
+				543BCCB129FEF43C00B00947 /* GameView.swift */,
+				543BCCAB29FEF15C00B00947 /* CardView.swift */,
+				54E0BA9F2A05507A000B2823 /* CardStack.swift */,
+			);
+			path = "Supporting Views";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -164,6 +183,8 @@
 			dependencies = (
 			);
 			name = "Cards vs. Humanity";
+			packageProductDependencies = (
+			);
 			productName = "Cards vs. Humanity";
 			productReference = 543BCC7829FEEEFB00B00947 /* Cards vs. Humanity.app */;
 			productType = "com.apple.product-type.application";
@@ -236,6 +257,8 @@
 				Base,
 			);
 			mainGroup = 543BCC6F29FEEEFB00B00947;
+			packageReferences = (
+			);
 			productRefGroup = 543BCC7929FEEEFB00B00947 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -278,15 +301,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				543BCCA829FEF00500B00947 /* ProductAuthenticity.swift in Sources */,
+				543BCCA829FEF00500B00947 /* Authenticator.swift in Sources */,
+				54E0BA9E2A054FF8000B2823 /* CardModel.swift in Sources */,
 				543BCC7E29FEEEFB00B00947 /* ContentView.swift in Sources */,
-				543BCCB029FEF40800B00947 /* CardStack.swift in Sources */,
 				543BCCAA29FEF0BC00B00947 /* FetchCards.swift in Sources */,
+				54E0BAA02A05507A000B2823 /* CardStack.swift in Sources */,
 				543BCCB229FEF43C00B00947 /* GameView.swift in Sources */,
-				543BCCA629FEEF7100B00947 /* LogoShape.swift in Sources */,
+				543BCCA629FEEF7100B00947 /* CustomShapes.swift in Sources */,
 				543BCCAC29FEF15C00B00947 /* CardView.swift in Sources */,
 				543BCC7C29FEEEFB00B00947 /* Cards_vs__HumanityApp.swift in Sources */,
-				543BCCAE29FEF18400B00947 /* GetSize.swift in Sources */,
+				543BCCAE29FEF18400B00947 /* Utilities.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

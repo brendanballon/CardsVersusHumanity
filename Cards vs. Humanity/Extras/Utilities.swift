@@ -1,5 +1,5 @@
 //
-//  GetSize.swift
+//  Utilities.swift
 //  Cards vs. Humanity
 //
 //  Created by Brendan Ballon on 4/30/23.
