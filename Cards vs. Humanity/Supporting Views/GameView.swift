@@ -8,59 +8,50 @@
 import SwiftUI
 
 struct GameView: View {
-    @State var cards: Cards?
-    @State var randomCard: BlackCard?
+    @State private var randomBlackCard: BlackCard?
+    @State private var randomWhiteCards: [WhiteCard] = []
     
+    @StateObject private var cardViewModel = CardViewModel()
     @State var allowReordering: Bool = true
     @State var viewSize: CGSize = .zero
     
-    init(cards: Cards? = nil, randomCard: BlackCard? = nil) {
-        self.cards = cards
-        self.randomCard = randomCard
-    }
+//    init(cards: Cards? = nil, randomCard: BlackCard? = nil) {
+//        self.cards = cards
+//        self.randomCard = randomCard
+//    }
     
     var body: some View {
         
         VStack {
-            CardView(card: randomCard ?? BlackCard(text: "", pack: "", pick: 0))
+            CardView(card: randomBlackCard ?? BlackCard(text: "", pack: "", pick: 0), flippedOver: false)
                 .frame(width: 250)
                 .onTapGesture {
-                    randomize()
+                    let (blackCard, whiteCards) = cardViewModel.randomize(whiteCardsCount: 5)
+                    randomBlackCard = blackCard
+                    randomWhiteCards = whiteCards
                 }
                 .frame(width: 100)
             
             Spacer()
             
             
-            CardStack(cards: [ WhiteCard(text: "Te", pack: ""),
-                               WhiteCard(text: "gg", pack: ""),
-                               WhiteCard(text: "yyyye", pack: ""),
-                               WhiteCard(text: "ge", pack: ""),
-                               WhiteCard(text: "Tyouyoe", pack: "")
-            
-                            ], allowReordering: allowReordering)
+            CardStack(cards: randomWhiteCards, allowReordering: allowReordering)
         }
         .padding()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .onAppear {
-            if let savedCardsData = UserDefaults.standard.data(forKey: "cardsData"),
-               let savedCards = try? JSONDecoder().decode(Cards.self, from: savedCardsData) {
-                self.cards = savedCards
-            } else {
-                fetchCards()
-            }
-            
-            randomize()
-        }
-    }
-}
-
-extension GameView {
-    func randomize() {
-        if let cards = cards {
-            if !cards.black.isEmpty {
-                if let randomIndex = (0..<cards.black.count).randomElement() {
-                    self.randomCard = cards.black[randomIndex]
+            cardViewModel.fetchCards { result in
+                switch result {
+                case .success(let fetchedCards):
+                    DispatchQueue.main.async {
+                        cardViewModel.cards = fetchedCards
+                        
+                        let (blackCard, whiteCards) = cardViewModel.randomize(whiteCardsCount: 5)
+                        randomBlackCard = blackCard
+                        randomWhiteCards = whiteCards
+                    }
+                case .failure(let error):
+                    print("Error fetching cards: \(error)")
                 }
             }
         }

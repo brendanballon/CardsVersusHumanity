@@ -9,9 +9,8 @@ import SwiftUI
 
 struct ContentView: View {
     @State var code: String = "" //uutrM19
-    @State var cards: Cards?
+//    @State var cards: Cards?
     @State var showAlert: Bool = false
-    @State var randomCard: String = ""
     @State var txtSize: CGSize = .zero
     
     var body: some View {
@@ -20,6 +19,7 @@ struct ContentView: View {
                 Text("Cards\nvs.\nHumanity")
                     .font(.system(size: txtSize.height * 1.75, weight: .semibold))
             }
+            ScatterView(count: 5)
             Spacer()
             Text("Verify ownership")
                 .font(.title)
@@ -52,16 +52,6 @@ struct ContentView: View {
         }
         .preferredColorScheme(.light)
         .padding()
-        .onAppear {
-            // Read cards from UserDefaults
-            if let savedCardsData = UserDefaults.standard.data(forKey: "cardsData"),
-               let savedCards = try? JSONDecoder().decode(Cards.self, from: savedCardsData) {
-                self.cards = savedCards
-            } else {
-                // Fetch cards
-                fetchCards()
-            }
-        }
     }
 }
 

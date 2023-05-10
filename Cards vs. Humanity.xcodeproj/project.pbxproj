@@ -20,6 +20,8 @@
 		543BCCAC29FEF15C00B00947 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543BCCAB29FEF15C00B00947 /* CardView.swift */; };
 		543BCCAE29FEF18400B00947 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543BCCAD29FEF18400B00947 /* Utilities.swift */; };
 		543BCCB229FEF43C00B00947 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543BCCB129FEF43C00B00947 /* GameView.swift */; };
+		5482F78F2A08872500CE75C7 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5482F78E2A08872500CE75C7 /* AboutView.swift */; };
+		5482F7912A09329200CE75C7 /* ScatterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5482F7902A09329200CE75C7 /* ScatterView.swift */; };
 		54E0BA9E2A054FF8000B2823 /* CardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E0BA9D2A054FF8000B2823 /* CardModel.swift */; };
 		54E0BAA02A05507A000B2823 /* CardStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E0BA9F2A05507A000B2823 /* CardStack.swift */; };
 /* End PBXBuildFile section */
@@ -58,6 +60,8 @@
 		543BCCAB29FEF15C00B00947 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		543BCCAD29FEF18400B00947 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		543BCCB129FEF43C00B00947 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
+		5482F78E2A08872500CE75C7 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
+		5482F7902A09329200CE75C7 /* ScatterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScatterView.swift; sourceTree = "<group>"; };
 		54E0BA9D2A054FF8000B2823 /* CardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardModel.swift; sourceTree = "<group>"; };
 		54E0BA9F2A05507A000B2823 /* CardStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardStack.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -163,6 +167,8 @@
 				543BCCB129FEF43C00B00947 /* GameView.swift */,
 				543BCCAB29FEF15C00B00947 /* CardView.swift */,
 				54E0BA9F2A05507A000B2823 /* CardStack.swift */,
+				5482F78E2A08872500CE75C7 /* AboutView.swift */,
+				5482F7902A09329200CE75C7 /* ScatterView.swift */,
 			);
 			path = "Supporting Views";
 			sourceTree = "<group>";
@@ -302,7 +308,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				543BCCA829FEF00500B00947 /* Authenticator.swift in Sources */,
+				5482F7912A09329200CE75C7 /* ScatterView.swift in Sources */,
 				54E0BA9E2A054FF8000B2823 /* CardModel.swift in Sources */,
+				5482F78F2A08872500CE75C7 /* AboutView.swift in Sources */,
 				543BCC7E29FEEEFB00B00947 /* ContentView.swift in Sources */,
 				543BCCAA29FEF0BC00B00947 /* FetchCards.swift in Sources */,
 				54E0BAA02A05507A000B2823 /* CardStack.swift in Sources */,
@@ -464,14 +472,18 @@
 		543BCC9D29FEEEFC00B00947 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "AppIcon (light)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon (dark)";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Cards vs. Humanity/Preview Content\"";
 				DEVELOPMENT_TEAM = 2AXPP7NWL2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Cards;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.card-games";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -493,14 +505,18 @@
 		543BCC9E29FEEEFC00B00947 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "AppIcon (light)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon (dark)";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Cards vs. Humanity/Preview Content\"";
 				DEVELOPMENT_TEAM = 2AXPP7NWL2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Cards;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.card-games";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

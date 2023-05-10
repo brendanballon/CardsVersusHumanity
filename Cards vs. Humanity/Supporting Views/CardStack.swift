@@ -27,7 +27,7 @@ struct CardStack: View {
         LazyVGrid(columns: gridItems) {
             ForEach(cards, id:\.text) { card in
                 if allowReordering {
-                    CardView(card: card)
+                    CardView(card: card, flippedOver: false)
                         .contentShape(.dragPreview, CardShape())
                         .onDrag {
                             self.draggedCard = card
@@ -36,7 +36,7 @@ struct CardStack: View {
                         .onDrop(of: ["card"], delegate: CardDropDelegate(card: card, cards: $cards, draggedCard: $draggedCard, isDragging: $isDragging))
                         .size(in: $cardSize)
                 } else {
-                    CardView(card: card)
+                    CardView(card: card, flippedOver: false)
                 }
             }
         }
