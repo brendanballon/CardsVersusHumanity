@@ -8,12 +8,30 @@
 import SwiftUI
 import UniformTypeIdentifiers
 
+extension View {
+    // Applies the given transform if the given condition evaluates to `true`.
+    // - Parameters:
+    //   - condition: The condition to evaluate.
+    //   - transform: The transform to apply to the source `View`.
+    // - Returns: Either the original `View` or the modified `View` if the condition is `true`.
+    @ViewBuilder func `if`<Content: View>(_ condition: Bool, transform: (Self) -> Content) -> some View {
+        if condition {
+            transform(self)
+        } else {
+            self
+        }
+    }
+}
+
 struct CardStack: View {
     
-    @State var cards: [Card]
+    @Namespace var name
+    
+    @State var cards: [WhiteCard]
     @State var allowReordering: Bool
     
-    @State var draggedCard: Card?
+    @State var draggedCard: WhiteCard?
+    @State var bool: Bool = true
     @State var isDragging: Bool = false
     @State private var dragOffset: CGSize = .zero
     @State private var spacing: CGFloat = 0
@@ -21,33 +39,34 @@ struct CardStack: View {
     @State var cardSize: CGSize = .zero
     @State var parentSize: CGSize = .zero
     
+    let posx = UIScreen.main.bounds.size.width / 2
+    let posy = UIScreen.main.bounds.size.height / 2
+    
+    @Binding var selected: WhiteCard?
+    
     var body: some View {
         let gridItems = Array(repeating: GridItem(.flexible(), spacing: parentSize.width / CGFloat((-cards.count + 1))), count: cards.count)
         
         LazyVGrid(columns: gridItems) {
-            ForEach(cards, id:\.text) { card in
-                if allowReordering {
-                    CardView(card: card, flippedOver: false)
-                        .contentShape(.dragPreview, CardShape())
-                        .onDrag {
-                            self.draggedCard = card
-                            return NSItemProvider(contentsOf: URL(string: "\(card.text)"))!
-                        }
-                        .onDrop(of: ["card"], delegate: CardDropDelegate(card: card, cards: $cards, draggedCard: $draggedCard, isDragging: $isDragging))
-                        .size(in: $cardSize)
-                } else {
-                    CardView(card: card, flippedOver: false)
-                }
+            ForEach(Array(cards.enumerated()), id:\.1) { index, element in
+                CardView(card: element)
+                    .contentShape(.dragPreview, CardShape())
+                    .onDrag {
+                        self.draggedCard = element
+                        return NSItemProvider(contentsOf: URL(string: "\(element.text)"))!
+                    }
+                    .onDrop(of: ["card"], delegate: CardDropDelegate(card: element, cards: $cards, draggedCard: $draggedCard, isDragging: $isDragging))
+                    .size(in: $cardSize)
             }
         }
         .size(in: $parentSize)
     }
 }
 
-struct CardDropDelegate : DropDelegate {
-    let card: Card
-    @Binding var cards: [Card]
-    @Binding var draggedCard : (Card)?
+struct CardDropDelegate: DropDelegate {
+    let card: WhiteCard
+    @Binding var cards: [WhiteCard]
+    @Binding var draggedCard : (WhiteCard)?
     @Binding var isDragging: Bool
     
     func performDrop(info: DropInfo) -> Bool {
@@ -75,20 +94,6 @@ struct CardDropDelegate : DropDelegate {
                     cards.move(fromOffsets: IndexSet(integer: from), toOffset: to > from ? to + 1 : to)
                 }
             }
-        }
-    }
-}
-
-struct TestView_Previews: PreviewProvider {
-    static var previews: some View {
-        VStack {
-            CardStack(cards: [
-                WhiteCard(text: "Card 1", pack: "Pack 1"),
-                WhiteCard(text: "Card 2", pack: "Pack 1"),
-                WhiteCard(text: "Card 3", pack: "Pack 1"),
-                WhiteCard(text: "Card 4", pack: "Pack 1"),
-                WhiteCard(text: "Card 5", pack: "Pack 2")
-            ], allowReordering: true)
         }
     }
 }

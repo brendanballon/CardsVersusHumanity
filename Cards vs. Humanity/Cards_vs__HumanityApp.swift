@@ -12,6 +12,7 @@ struct Cards_vs__HumanityApp: App {
     var body: some Scene {
         WindowGroup {
 //            GameView()
+//                .environment(\.cardViewModel, CardViewModel())
 //            ContentView()
             ScatterView(count: 5)
         }

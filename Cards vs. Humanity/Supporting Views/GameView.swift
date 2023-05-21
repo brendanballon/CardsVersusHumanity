@@ -8,22 +8,22 @@
 import SwiftUI
 
 struct GameView: View {
+    @Environment(\.cardViewModel) private var cardViewModel
     @State private var randomBlackCard: BlackCard?
     @State private var randomWhiteCards: [WhiteCard] = []
+
     
-    @StateObject private var cardViewModel = CardViewModel()
     @State var allowReordering: Bool = true
     @State var viewSize: CGSize = .zero
     
-//    init(cards: Cards? = nil, randomCard: BlackCard? = nil) {
-//        self.cards = cards
-//        self.randomCard = randomCard
-//    }
+    @State var selected: WhiteCard? = nil
+    
+    @State var movin: Bool = false
     
     var body: some View {
         
         VStack {
-            CardView(card: randomBlackCard ?? BlackCard(text: "", pack: "", pick: 0), flippedOver: false)
+            CardView(card: randomBlackCard ?? BlackCard(text: "", pack: "", pick: 0))
                 .frame(width: 250)
                 .onTapGesture {
                     let (blackCard, whiteCards) = cardViewModel.randomize(whiteCardsCount: 5)
@@ -33,9 +33,10 @@ struct GameView: View {
                 .frame(width: 100)
             
             Spacer()
-            
-            
-            CardStack(cards: randomWhiteCards, allowReordering: allowReordering)
+
+            if !randomWhiteCards.isEmpty {
+                CardStack(cards: randomWhiteCards, allowReordering: true, selected: $selected)
+            }
         }
         .padding()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -45,10 +46,11 @@ struct GameView: View {
                 case .success(let fetchedCards):
                     DispatchQueue.main.async {
                         cardViewModel.cards = fetchedCards
-                        
+
                         let (blackCard, whiteCards) = cardViewModel.randomize(whiteCardsCount: 5)
                         randomBlackCard = blackCard
                         randomWhiteCards = whiteCards
+                        print(randomWhiteCards)
                     }
                 case .failure(let error):
                     print("Error fetching cards: \(error)")

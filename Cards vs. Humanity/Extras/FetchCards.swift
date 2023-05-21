@@ -5,6 +5,7 @@
 //  Created by Brendan Ballon on 4/30/23.
 //
 
+import SwiftUI
 import Foundation
 import Combine
 
@@ -67,5 +68,16 @@ class CardViewModel: ObservableObject {
         }
 
         return (randomBlackCard, randomWhiteCards)
+    }
+}
+
+struct CardViewModelEnvironmentKey: EnvironmentKey {
+    static let defaultValue: CardViewModel = CardViewModel()
+}
+
+extension EnvironmentValues {
+    var cardViewModel: CardViewModel {
+        get { self[CardViewModelEnvironmentKey.self] }
+        set { self[CardViewModelEnvironmentKey.self] = newValue }
     }
 }

@@ -13,35 +13,43 @@ struct ScatterView: View {
     
     @State private var randomBlackCard: BlackCard?
     @State private var randomWhiteCards: [WhiteCard] = []
+    @State var flippedCards: [Bool] = Array(repeating: false, count: 5)
+    @State private var rotations: [Double] = []
 
     @State private var rotation: Double = .random(in: 345..<375)
     @State private var scale = 5.0
     @State private var done: Bool = false
     @State private var show: Bool = false
-    @State private var flipped: Bool = false
     @State private var selected: Int? = nil
 
     @StateObject private var cardViewModel = CardViewModel()
     
+    func toggleAllExceptOne(_ array: inout [Bool], excludeIndex: Int) {
+        for (index, _) in array.enumerated() {
+            if index != excludeIndex {
+                array[index] = !array[index]
+            }
+        }
+    }
+    
     var body: some View {
         ZStack {
             ForEach(Array(randomWhiteCards.enumerated()), id:\.1) { index, element in
-                let rot: Double = 345
-                
-                CardView(card: element, flippedOver: selected != index)
-                    .opacity(show ? 1 : 0)
-                    .frame(width: viewSize.width / 4)
-                    .rotationEffect(.degrees(done ? rot : rotation))
-                    .offset(done ? angleOf(index) : .zero)
-                    .zIndex(flipped && index != selected ? 0 : 1)
-                    .animation(.spring(), value: done)
-                    .onTapGesture {
+                CardView(card: element, faceDown: $flippedCards[index], tappable: false) { _ in
+                    if selected == nil {
                         selected = index
-                        print("dd")
+                        toggleAllExceptOne(&flippedCards, excludeIndex: selected!)
                     }
+                }
+                .contentShape(Rectangle())
+                .opacity(show ? 1 : 0)
+                .zIndex(selected == index ? 1 : 0)
+                .frame(width: viewSize.width / 4)
+                .rotationEffect(.degrees(done ? rotations[index] : rotation))
+                .offset(done ? angleOf(index) : .zero)
             }
             
-            CardView(card: randomBlackCard ?? BlackCard(text: "", pack: "", pick: 0), flippedOver: true)
+            CardView(card: randomBlackCard ?? BlackCard(text: "", pack: "", pick: 0))
                 .frame(width: viewSize.width / 4)
                 .scaleEffect(scale)
                 .animation(.spring(response: 0.17, dampingFraction: 0.51, blendDuration: 1.99), value: scale)
@@ -59,6 +67,10 @@ struct ScatterView: View {
                         let (blackCard, whiteCards) = cardViewModel.randomize(whiteCardsCount: count)
                         randomBlackCard = blackCard
                         randomWhiteCards = whiteCards
+                        
+                        //flippedCards = randomWhiteCards.map { _ in false }
+                        rotations = randomWhiteCards.map { _ in .random(in: 345..<375) }
+                        print("rots \(rotations)")
                     }
                 case .failure(let error):
                     print("Error fetching cards: \(error)")
@@ -90,13 +102,6 @@ extension ScatterView {
         
         return size
     }
-    
-//    func select(_ index: Double) {
-//        flipped = !flipped
-//        if flipped {
-//            with
-//        }
-//    }
 }
 
 struct ScatterView_Previews: PreviewProvider {
