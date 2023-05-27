@@ -8,9 +8,8 @@
 import Foundation
 
 protocol Card: Encodable {
-//    var id: UUID { get }
     var text: String { get }
-    var pack: String { get }
+    //var pack: String { get } ** marked unused by periphery (??)
 }
 
 struct Cards: Codable {
@@ -19,7 +18,6 @@ struct Cards: Codable {
 }
 
 struct BlackCard: Codable, Hashable, Card  {
-//    var id = UUID()
     let text, pack: String
     let pick: Int
     
@@ -29,7 +27,6 @@ struct BlackCard: Codable, Hashable, Card  {
 }
 
 struct WhiteCard: Codable, Hashable, Card {
-//    var id = UUID()
     let text, pack: String
     
     func hash(into hasher: inout Hasher) {

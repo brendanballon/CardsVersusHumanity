@@ -8,48 +8,42 @@
 import SwiftUI
 import UniformTypeIdentifiers
 
-extension View {
-    // Applies the given transform if the given condition evaluates to `true`.
-    // - Parameters:
-    //   - condition: The condition to evaluate.
-    //   - transform: The transform to apply to the source `View`.
-    // - Returns: Either the original `View` or the modified `View` if the condition is `true`.
-    @ViewBuilder func `if`<Content: View>(_ condition: Bool, transform: (Self) -> Content) -> some View {
-        if condition {
-            transform(self)
-        } else {
-            self
-        }
-    }
-}
-
 struct CardStack: View {
-    
-    @Namespace var name
-    
     @State var cards: [WhiteCard]
     @State var allowReordering: Bool
     
     @State var draggedCard: WhiteCard?
-    @State var bool: Bool = true
     @State var isDragging: Bool = false
-    @State private var dragOffset: CGSize = .zero
-    @State private var spacing: CGFloat = 0
     
     @State var cardSize: CGSize = .zero
     @State var parentSize: CGSize = .zero
-    
-    let posx = UIScreen.main.bounds.size.width / 2
-    let posy = UIScreen.main.bounds.size.height / 2
-    
+
     @Binding var selected: WhiteCard?
-    
+
+    var namespace: Namespace.ID
+
     var body: some View {
         let gridItems = Array(repeating: GridItem(.flexible(), spacing: parentSize.width / CGFloat((-cards.count + 1))), count: cards.count)
         
         LazyVGrid(columns: gridItems) {
             ForEach(Array(cards.enumerated()), id:\.1) { index, element in
-                CardView(card: element)
+                if element != selected {
+                    CardView(card: element) { card in
+                        if element == cards.last {
+                            withAnimation(.spring()) {
+                                selected = element
+                            }
+                        } else if selected != nil {
+                            withAnimation() {
+                                selected = nil
+                            }
+                            //cards.move(fromOffsets: IndexSet(integer: index), toOffset: cards.count)
+                        } else {
+                            cards.move(fromOffsets: IndexSet(integer: index), toOffset: cards.count)
+                        }
+                    }
+                    .matchedGeometryEffect(id: "ge\(index)", in: namespace)
+                    .animation(.default, value: cards)
                     .contentShape(.dragPreview, CardShape())
                     .onDrag {
                         self.draggedCard = element
@@ -57,6 +51,7 @@ struct CardStack: View {
                     }
                     .onDrop(of: ["card"], delegate: CardDropDelegate(card: element, cards: $cards, draggedCard: $draggedCard, isDragging: $isDragging))
                     .size(in: $cardSize)
+                }
             }
         }
         .size(in: $parentSize)
@@ -97,3 +92,16 @@ struct CardDropDelegate: DropDelegate {
         }
     }
 }
+//
+//struct CardStack_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CardStack(cards: [WhiteCard(text: "1", pack: ""),
+//                          WhiteCard(text: "1", pack: ""),
+//                          WhiteCard(text: "1", pack: ""),
+//                          WhiteCard(text: "1", pack: ""),
+//                          WhiteCard(text: "1", pack: "")],
+//                  allowReordering: true,
+//                  selected: <#T##Binding<WhiteCard?>#>,
+//                  namespace: <#T##Namespace.ID#>)
+//    }
+//}

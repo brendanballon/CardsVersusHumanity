@@ -71,7 +71,7 @@ struct CardView: View {
         .onAppear {
             withAnimation(.none) {
                 if faceDown != false {
-                    backDegree = 0.0
+                    backDegree = 0
                     frontDegree = -90
                 } else {
                     backDegree = 90
@@ -89,13 +89,15 @@ extension CardView {
         
         @State private var textSize: CGSize = .zero
 
+        // Add code to allow cards not in last to be selected, then moved to last
+        
         var body: some View {
             GeometryReader { geometry in
                 VStack(alignment: .leading, spacing: 0) {
-                    Text(card.text.replacingOccurrences(of: "_", with: "_______"))
+                    Text(card.text.replacingOccurrences(of: "_", with: "______"))
                         .font(.system(size: geometry.size.width / 12))
                         .fontWeight(.semibold)
-                        .allowsTightening(true)
+                        .minimumScaleFactor(0.0001)
                     
                     Spacer()
 

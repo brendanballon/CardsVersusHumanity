@@ -9,37 +9,42 @@ import SwiftUI
 
 struct GameView: View {
     @Environment(\.cardViewModel) private var cardViewModel
+    @Namespace var animation
+    
     @State private var randomBlackCard: BlackCard?
     @State private var randomWhiteCards: [WhiteCard] = []
 
-    
-    @State var allowReordering: Bool = true
-    @State var viewSize: CGSize = .zero
-    
     @State var selected: WhiteCard? = nil
-    
-    @State var movin: Bool = false
-    
+
     var body: some View {
-        
         VStack {
-            CardView(card: randomBlackCard ?? BlackCard(text: "", pack: "", pick: 0))
+            CardView(card: randomBlackCard ?? BlackCard(text: "", pack: "", pick: 0)) { _ in
+                let (blackCard, whiteCards) = cardViewModel.randomize(whiteCardsCount: 5)
+                randomBlackCard = blackCard
+                randomWhiteCards = whiteCards
+            }
                 .frame(width: 250)
-                .onTapGesture {
-                    let (blackCard, whiteCards) = cardViewModel.randomize(whiteCardsCount: 5)
-                    randomBlackCard = blackCard
-                    randomWhiteCards = whiteCards
-                }
-                .frame(width: 100)
+                .fixedSize()
             
             Spacer()
-
+            
             if !randomWhiteCards.isEmpty {
-                CardStack(cards: randomWhiteCards, allowReordering: true, selected: $selected)
+                CardStack(cards: randomWhiteCards, allowReordering: true, selected: $selected, namespace: animation)
             }
         }
         .padding()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .overlay {
+            if selected != nil {
+                CardView(card: selected!) { _ in
+                    withAnimation(.spring()) {
+                        selected = nil
+                    }
+                }
+                .matchedGeometryEffect(id: "ge4", in: animation)
+                .frame(maxWidth: 200)
+            }
+        }
         .onAppear {
             cardViewModel.fetchCards { result in
                 switch result {

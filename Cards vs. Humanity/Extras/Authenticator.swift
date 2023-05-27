@@ -10,8 +10,8 @@ import Foundation
 func authenticate(code: String, completion: @escaping (Bool) -> Void) {
     let parameters = "{\"code\":\"\(code)\"}"
     let postData = parameters.data(using: .utf8)
-
     var request = URLRequest(url: URL(string: "https://www.cah.io/verify")!,timeoutInterval: Double.infinity)
+    
     request.addValue("application/json, text/plain, */*", forHTTPHeaderField: "Accept")
     request.addValue("en-US,en;q=0.9", forHTTPHeaderField: "Accept-Language")
     request.addValue("keep-alive", forHTTPHeaderField: "Connection")
@@ -28,6 +28,7 @@ func authenticate(code: String, completion: @escaping (Bool) -> Void) {
             completion(false)
             return
         }
+        
         do {
             if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any], let status = json["status"] as? String {
                 completion(status == "success")
@@ -37,6 +38,5 @@ func authenticate(code: String, completion: @escaping (Bool) -> Void) {
             completion(false)
         }
     }
-
     task.resume()
 }

@@ -11,10 +11,10 @@ import SwiftUI
 struct Cards_vs__HumanityApp: App {
     var body: some Scene {
         WindowGroup {
-//            GameView()
+            GameView()
 //                .environment(\.cardViewModel, CardViewModel())
 //            ContentView()
-            ScatterView(count: 5)
+//            ScatterView(count: 5)
         }
     }
 }

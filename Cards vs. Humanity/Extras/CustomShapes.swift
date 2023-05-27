@@ -12,6 +12,7 @@ struct LogoShape: Shape {
         var path = Path()
         let width = rect.size.width
         let height = rect.size.height
+        
         path.move(to: CGPoint(x: 0.48809*width, y: 0))
         path.addCurve(to: CGPoint(x: 0.58431*width, y: 0.01211*height), control1: CGPoint(x: 0.51671*width, y: 0.00362*height), control2: CGPoint(x: 0.55049*width, y: 0.00784*height))
         path.addCurve(to: CGPoint(x: 0.71636*width, y: 0.02872*height), control1: CGPoint(x: 0.62831*width, y: 0.01766*height), control2: CGPoint(x: 0.67236*width, y: 0.02317*height))
@@ -60,6 +61,7 @@ struct LogoShape: Shape {
         path.addCurve(to: CGPoint(x: 0.96031*width, y: 0.24229*height), control1: CGPoint(x: 0.9496*width, y: 0.33156*height), control2: CGPoint(x: 0.95498*width, y: 0.28693*height))
         path.addCurve(to: CGPoint(x: 0.97404*width, y: 0.1261*height), control1: CGPoint(x: 0.96507*width, y: 0.20193*height), control2: CGPoint(x: 0.96982*width, y: 0.16165*height))
         path.closeSubpath()
+        
         return path
     }
 }
@@ -77,6 +79,7 @@ struct CardShape: Shape {
         let frame = CGRect(x: xInset, y: yInset, width: width, height: height)
         
         var path = Path()
+        
         path.move(to: CGPoint(x: frame.minX + cornerRadius, y: frame.minY))
         path.addLine(to: CGPoint(x: frame.maxX - cornerRadius, y: frame.minY))
         path.addArc(center: CGPoint(x: frame.maxX - cornerRadius, y: frame.minY + cornerRadius), radius: cornerRadius, startAngle: Angle(degrees: -90), endAngle: Angle(degrees: 0), clockwise: false)
